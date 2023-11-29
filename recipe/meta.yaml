@@ -10,27 +10,35 @@ source:
   sha256: 2ac5705b17cb28e8b115053c2d51cf3321dc2041b1d75e2db6157e05146d0fba
 
 build:
-  noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - pip
     - python
+    - wheel
+    - setuptools
   run:
     - python
 
 test:
   imports:
     - dsnparse
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
-  home: http://github.com/Jaymon/dsnparse
+  home: https://github.com/Jaymon/dsnparse
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
-  summary: parse dsn urls
+  summary: Parse dsn urls.
+  description: Parse dsn urls.
+  doc_url: https://github.com/Jaymon/dsnparse
+  dev_url: https://github.com/Jaymon/dsnparse
 
 extra:
   recipe-maintainers:
